@@ -67,10 +67,14 @@
             var type = $('#type_input').val();
             var rank = $('#rank_input').val();
 
+            var currentDate = new Date();
+            var formattedDate = currentDate.toISOString().split('T')[0];
+
             var dataToSend = {
                 title: title,
                 type: type,
-                rank: rank
+                rank: rank,
+                currentDate: formattedDate
             };
 
             $.ajax({
