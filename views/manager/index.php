@@ -25,6 +25,21 @@
         <link href="../../assets/css/icons.min.css" rel="stylesheet" type="text/css">
         <link href="../../assets/css/app.min.css" rel="stylesheet" type="text/css">
 
+        <style>
+
+            .detail-answer .title-answer{
+                font-size: 18px;
+            }
+
+            .item-answer{
+                margin: 2px 0;
+                font-size: 15px;
+            }
+
+            .item-answer i{
+                font-size: 15px;
+            }
+        </style>
     </head>
 
     <body>
@@ -129,7 +144,7 @@
                                 </a>
                                 <ul class="nav-second-level" aria-expanded="false">
                                     <li>
-                                        <a href="">Danh sách</a>
+                                        <a href="./?manager=list-users">Danh sách</a>
                                     </li>
                                     <li>
                                         <a href="">Phân quyền</a>
@@ -171,6 +186,14 @@
 
                             case "detail-question":
                                 require("./questions/detail.php");
+                                break;
+
+                            case "list-users":
+                                require("./users/list.php");
+                                break;
+
+                            case "detail-user":
+                                require("./users/list.php");
                                 break;
 
                             default:
