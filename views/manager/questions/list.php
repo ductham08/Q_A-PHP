@@ -32,7 +32,7 @@
                             <td>2023/12/23</td>
                             <td>Dễ</td>
                             <td>
-                                <a href="#">
+                                <a href="?manager=detail-question">
                                     <i class="far fa-eye"></i>
                                     <span>Chi tiết</span>
                                 </a>

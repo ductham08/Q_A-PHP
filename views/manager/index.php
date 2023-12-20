@@ -169,6 +169,10 @@
                                 require("./questions/add.php");
                                 break;
 
+                            case "detail-question":
+                                require("./questions/detail.php");
+                                break;
+
                             default:
                         }
                     ?>
