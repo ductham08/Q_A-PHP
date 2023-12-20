@@ -1,12 +1,10 @@
-﻿
-<?php
+﻿<?php
 
-    require ("../../config/link.php");
+    require_once("../../config/config.php");
 
+    $manager = isset($_GET["manager"]) ? $_GET["manager"] : "";
 
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -16,13 +14,20 @@
         <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description">
         <meta content="Coderthemes" name="author">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <!-- App favicon -->
-        
+
+        <link rel="shortcut icon" href="../../assets/images/favicon.ico">
+
+        <!-- plugin css -->
+        <link href="../../assets/libs/jquery-vectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css">
+
+        <!-- App css -->
+        <link href="../../assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+        <link href="../../assets/css/icons.min.css" rel="stylesheet" type="text/css">
+        <link href="../../assets/css/app.min.css" rel="stylesheet" type="text/css">
 
     </head>
 
     <body>
-
         <!-- Begin page -->
         <div id="wrapper">
 
@@ -32,7 +37,7 @@
 
                     <li class="dropdown notification-list">
                         <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                            <img src="assets\images\users\user-1.jpg" alt="user-image" class="rounded-circle">
+                            <img src="../../assets/images/users/user-1.jpg" alt="user-image" class="rounded-circle">
                             <span class="pro-user-name ml-1">Còm<i class="mdi mdi-chevron-down"></i> 
                             </span>
                         </a>
@@ -66,12 +71,12 @@
                 <div class="logo-box">
                     <a href="index.html" class="logo text-center">
                         <span class="logo-lg">
-                            <img src="assets\images\logo-light.png" alt="" height="24">
+                            <img src="../../assets/images/logo-light.png" alt="" height="24">
                             <!-- <span class="logo-lg-text-light">Upvex</span> -->
                         </span>
                         <span class="logo-sm">
                             <!-- <span class="logo-sm-text-dark">X</span> -->
-                            <img src="assets\images\logo-sm.png" alt="" height="28">
+                            <img src="../../assets/images/logo-sm.png" alt="" height="28">
                         </span>
                     </a>
                 </div>
@@ -100,30 +105,34 @@
 
                             <li>
                                 <a href="javascript: void(0);">
-                                    <i class="la la-dashboard"></i>
-                                    <span> Đề tài </span>
+                                    <i class="fas fa-question"></i>
+                                    <span>  Bộ câu hỏi </span>
                                 </a>
                                 <ul class="nav-second-level" aria-expanded="false">
                                     <li>
-                                        <a href="./question.html">Danh sách</a>
+                                        <a href="./?manager=list-topic">
+                                            <span>Danh sách</span>
+                                        </a>
                                     </li>
                                     <li>
-                                        <a href="./question.html">Thêm mới</a>
+                                        <a href="./?manager=add-topic">
+                                            <span>Thêm mới</span>
+                                        </a>
                                     </li>
                                 </ul>
                             </li>
 
                             <li>
                                 <a href="javascript: void(0);">
-                                    <i class="la la-dashboard"></i>
-                                    <span> Bộ câu hỏi </span>
+                                    <i class="fas fa-user"></i>
+                                    <span>  Người chơi </span>
                                 </a>
                                 <ul class="nav-second-level" aria-expanded="false">
                                     <li>
-                                        <a href="./question.html">Danh sách</a>
+                                        <a href="">Danh sách</a>
                                     </li>
                                     <li>
-                                        <a href="./question.html">Thêm mới</a>
+                                        <a href="">Phân quyền</a>
                                     </li>
                                 </ul>
                             </li>
@@ -148,9 +157,21 @@
             <div class="content-page">
 
                 <!-- CONTENT START -->
-                <div class="content">
+                <div class="content" style="padding: 15px 0 0 0">
                     
-                
+                    <?php
+                        switch ($manager) {
+                            case "list-topic":
+                                require("./questions/list.php");
+                                break;
+
+                            case "add-topic":
+                                require("./questions/add.php");
+                                break;
+
+                            default:
+                        }
+                    ?>
                     
                 </div>
                 <!-- CONTENT END -->
@@ -173,9 +194,26 @@
             <!-- End Page content -->
             <!-- ============================================================== -->
 
+                        
+            <!-- Vendor js -->
+            <script src="../../assets/js/vendor.min.js"></script>
+
+            <!-- Third Party js-->
+            <script src="../../assets/libs/peity/jquery.peity.min.js"></script>
+            <script src="../../assets/libs/apexcharts/apexcharts.min.js"></script>
+            <script src="../../assets/libs/jquery-vectormap/jquery-jvectormap-1.2.2.min.js"></script>
+            <script src="../../assets/libs/jquery-vectormap/jquery-jvectormap-us-merc-en.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" crossorigin="anonymous"></script>
+
+            <!-- Dashboard init -->
+            <script src="../../assets/js/pages/dashboard-1.init.js"></script>
+
+            <!-- App js -->
+            <script src="../../assets/js/app.min.js"></script>
 
         </div>
         <!-- END wrapper -->
+
         
     </body>
 </html>

@@ -1,105 +1,42 @@
-
 <?php
-
     require ("./config/link.php");
-    session_start();
 
     $action = isset($_GET["action"]) ? $_GET["action"] : "";
+    switch ($action) {
+        case "":
+            require("./views/client/index.php");
+            break;
 
-    $userLogin = $_SESSION['user'];
-    
-    if(empty($userLogin) || !isset($userLogin) || !$userLogin){
-        header("location: ./signup.php");
+        case "manager":
+            require("./views/manager/index.php");
+            break;
+
+        default:
     }
-
 ?>
 
+<link rel="shortcut icon" href="assets\images\favicon.ico">
 
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <title>Upvex - Dashboard</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description">
-        <meta content="Coderthemes" name="author">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <!-- App favicon -->
-        
+<!-- plugin css -->
+<link href="assets\libs\jquery-vectormap\jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css">
 
-    </head>
+<!-- App css -->
+<link href="assets\css\bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="assets\css\icons.min.css" rel="stylesheet" type="text/css">
+<link href="assets\css\app.min.css" rel="stylesheet" type="text/css">
 
-    <body>
 
-        <!-- Begin page -->
-        <div id="wrapper">
+<!-- Vendor js -->
+<script src="assets\js\vendor.min.js"></script>
 
-            <?php
-            
-            switch ($action) {
-                case "":
-                    require("./pages/home.php");
-                    break;
+<!-- Third Party js-->
+<script src="assets\libs\peity\jquery.peity.min.js"></script>
+<script src="assets\libs\apexcharts\apexcharts.min.js"></script>
+<script src="assets\libs\jquery-vectormap\jquery-jvectormap-1.2.2.min.js"></script>
+<script src="assets\libs\jquery-vectormap\jquery-jvectormap-us-merc-en.js"></script>
 
-                case "home":
-                    require("./pages/home.php");
-                    break;
+<!-- Dashboard init -->
+<script src="assets\js\pages\dashboard-1.init.js"></script>
 
-                case "mission":
-                    require("./pages/mission.php");
-                    break;
-
-                case "account":
-                    require("./pages/account.php");
-                    break;
-
-                case "support":
-                    require("./pages/support.php");
-                    break;
-
-                case "bank":
-                    require("./pages/bank.php");
-                    break;
-
-                case "setting":
-                    require("./pages/setting.php");
-                    break;
-
-                case "messager":
-                    require("./pages/messager.php");
-                    break;
-
-                case "history-mission":
-                    require("./pages/history-mission.php");
-                    break;
-
-                case "history-payout":
-                    require("./pages/history-payout.php");
-                    break;
-
-                case "history-payin":
-                    require("./pages/history-payin.php");
-                    break;
-
-                case "payment":
-                    require("./pages/payment.php");
-                    break;
-
-                case "change-password":
-                    require("./pages/change-password.php");
-                    break;
-
-                case "change-code":
-                    require("./pages/change-code.php");
-                    break;
-
-                default:
-            }
-
-            ?>
-
-        </div>
-        <!-- END wrapper -->
-        
-    </body>
-</html>
+<!-- App js -->
+<script src="assets\js\app.min.js"></script>

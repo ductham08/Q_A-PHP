@@ -1,27 +1,24 @@
+<?php
+
+require ("./config/link.php");
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Upvex - Responsive Admin Dashboard Template</title>
+        <title>Upvex - Dashboard</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description">
         <meta content="Coderthemes" name="author">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <!-- App favicon -->
-        <link rel="shortcut icon" href="assets\images\favicon.ico">
-
-        <!-- plugin css -->
-        <link href="assets\libs\jquery-vectormap\jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css">
-
-        <!-- App css -->
-        <link href="assets\css\bootstrap.min.css" rel="stylesheet" type="text/css">
-        <link href="assets\css\icons.min.css" rel="stylesheet" type="text/css">
-        <link href="assets\css\app.min.css" rel="stylesheet" type="text/css">
+        
 
     </head>
 
     <body>
-
         <!-- Begin page -->
         <div id="wrapper">
 
@@ -32,28 +29,20 @@
                     <li class="dropdown notification-list">
                         <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                             <img src="assets\images\users\user-1.jpg" alt="user-image" class="rounded-circle">
-                            <span class="pro-user-name ml-1">
-                                Marcia J. <i class="mdi mdi-chevron-down"></i> 
+                            <span class="pro-user-name ml-1">Còm<i class="mdi mdi-chevron-down"></i> 
                             </span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                             <!-- item-->
-                            <div class="dropdown-item noti-title">
-                                <h5 class="m-0 text-white">
-                                    Welcome !
-                                </h5>
-                            </div>
-
-                            <!-- item-->
                             <a href="javascript:void(0);" class="dropdown-item notify-item">
                                 <i class="fe-user"></i>
-                                <span>My Account</span>
+                                <span>Tài khoản</span>
                             </a>
 
                             <!-- item-->
                             <a href="javascript:void(0);" class="dropdown-item notify-item">
                                 <i class="fe-settings"></i>
-                                <span>Settings</span>
+                                <span>Cài đặt</span>
                             </a>
 
                             <div class="dropdown-divider"></div>
@@ -61,7 +50,7 @@
                             <!-- item-->
                             <a href="javascript:void(0);" class="dropdown-item notify-item">
                                 <i class="fe-log-out"></i>
-                                <span>Logout</span>
+                                <span>Đăng xuất</span>
                             </a>
 
                         </div>
@@ -105,20 +94,32 @@
 
                         <ul class="metismenu" id="side-menu">
 
-                            <li class="menu-title">Navigation</li>
+                            <li>
+                                <a href="javascript: void(0);">
+                                    <i class="la la-dashboard"></i>
+                                    <span> Đề tài </span>
+                                </a>
+                                <ul class="nav-second-level" aria-expanded="false">
+                                    <li>
+                                        <a href="./question.html">Danh sách</a>
+                                    </li>
+                                    <li>
+                                        <a href="./question.html">Thêm mới</a>
+                                    </li>
+                                </ul>
+                            </li>
 
                             <li>
                                 <a href="javascript: void(0);">
                                     <i class="la la-dashboard"></i>
-                                    <span class="badge badge-info badge-pill float-right">2</span>
-                                    <span> Quản lý </span>
+                                    <span> Bộ câu hỏi </span>
                                 </a>
                                 <ul class="nav-second-level" aria-expanded="false">
                                     <li>
-                                        <a href="./question.html">Câu hỏi</a>
+                                        <a href="./question.html">Danh sách</a>
                                     </li>
                                     <li>
-                                        <a href="./question.html">Đề thi</a>
+                                        <a href="./question.html">Thêm mới</a>
                                     </li>
                                 </ul>
                             </li>
@@ -140,40 +141,22 @@
             <!-- Start Page Content here -->
             <!-- ============================================================== -->
 
-            <div class="content-page d-flex justify-content-center align-items-center">
+            <div class="content-page">
+
+                <!-- CONTENT START -->
                 <div class="content">
-
-                    <div class="row">
-                        <div class="col-12">
-    
-                            <div class="text-center">
-                                <img src="assets\images\maintenance.svg" width="350" alt="error-image">
-                                <h2 class="mt-4">Chào mừng đến với bài kiểm tra</h2>
-                                <p class="text-muted">Vui lòng không gian lận trong quá trình làm bài!</p>
-    
-                                <div class="row mt-5">
-                                    
-                                </div> <!-- end row-->
-                            </div> <!-- end /.text-center-->
-    
-                        </div> <!-- end col -->
-                    </div>
-
-                </div> <!-- content -->
+                    
+                
+                    
+                </div>
+                <!-- CONTENT END -->
 
                 <!-- Footer Start -->
                 <footer class="footer">
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-6">
-                                2019 &copy; Design by <a href="">Upvex</a> 
-                            </div>
-                            <div class="col-md-6">
-                                <div class="text-md-right footer-links d-none d-sm-block">
-                                    <a href="javascript:void(0);">About Us</a>
-                                    <a href="javascript:void(0);">Help</a>
-                                    <a href="javascript:void(0);">Contact Us</a>
-                                </div>
+                                2023 &copy; Thiết kế bởi <a href="">Upvex</a> 
                             </div>
                         </div>
                     </div>
@@ -189,21 +172,6 @@
 
         </div>
         <!-- END wrapper -->
-
-        <!-- Vendor js -->
-        <script src="assets\js\vendor.min.js"></script>
-
-        <!-- Third Party js-->
-        <script src="assets\libs\peity\jquery.peity.min.js"></script>
-        <script src="assets\libs\apexcharts\apexcharts.min.js"></script>
-        <script src="assets\libs\jquery-vectormap\jquery-jvectormap-1.2.2.min.js"></script>
-        <script src="assets\libs\jquery-vectormap\jquery-jvectormap-us-merc-en.js"></script>
-
-        <!-- Dashboard init -->
-        <script src="assets\js\pages\dashboard-1.init.js"></script>
-
-        <!-- App js -->
-        <script src="assets\js\app.min.js"></script>
         
     </body>
 </html>
