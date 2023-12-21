@@ -25,7 +25,10 @@
 <link href="assets\css\icons.min.css" rel="stylesheet" type="text/css">
 <link href="assets\css\app.min.css" rel="stylesheet" type="text/css">
 
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <!-- Vendor js -->
 <script src="assets\js\vendor.min.js"></script>
 

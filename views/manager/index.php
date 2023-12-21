@@ -27,6 +27,7 @@
         <link href="../../assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
         <link href="../../assets/css/icons.min.css" rel="stylesheet" type="text/css">
         <link href="../../assets/css/app.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
         <style>
 
@@ -42,6 +43,14 @@
             .item-answer i{
                 font-size: 15px;
             }
+            .#toast-containe{
+                z-index: 9999;
+            }
+
+            .#toast-container *{
+                font-size: 10px
+            }
+
         </style>
     </head>
 
@@ -191,6 +200,10 @@
                                 require("./questions/detail.php");
                                 break;
 
+                            case "remove-question":
+                                require("./questions/remove.php");
+                                break;
+
                             case "list-users":
                                 require("./users/list.php");
                                 break;
@@ -227,6 +240,7 @@
                         
             <!-- Vendor js -->
             <script src="../../assets/js/vendor.min.js"></script>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
             <!-- Third Party js-->
             <script src="../../assets/libs/peity/jquery.peity.min.js"></script>

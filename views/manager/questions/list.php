@@ -1,3 +1,12 @@
+<?php
+
+    require_once("../../config/config.php");
+    $sqlGetQuestion = "SELECT * FROM `topics` ORDER BY 'currentDate' DESC";
+
+    $dataAllTopic = executeQuery($sqlGetQuestion, true) ?: [];
+    $data = $dataAllTopic['data'] != null ? $dataAllTopic['data'] : [];
+?>
+
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -13,7 +22,6 @@
                     <thead>
                         <tr>
                             <th>Tiêu đề</th>
-                            <th>Số câu hỏi</th>
                             <th>Thể loại</th>
                             <th>Người tạo</th>
                             <th>Ngày tạo</th>
@@ -24,20 +32,27 @@
                 
                 
                     <tbody>
-                        <tr>
-                            <td>Hỏi cho vui</td>
-                            <td>15</td>
-                            <td>Trắc nghiệm</td>
-                            <td>Còm</td>
-                            <td>2023/12/23</td>
-                            <td>Dễ</td>
-                            <td>
-                                <a href="?manager=detail-question">
-                                    <i class="far fa-eye"></i>
-                                    <span>Chi tiết</span>
-                                </a>
-                            </td>
-                        </tr>
+                        <?php foreach ($data as $key => $value) : ?>
+                            <tr>
+                                <td><?= $value['title'] ?></td>
+                                <td><?= formatQuestionType($value['type']) ?></td>
+                                <td>Còm</td>
+                                <td><?= $value['currentDate'] ?></td>
+                                <td><?= formatQuestionRank($value['rank']) ?></td>
+                                <td>
+                                    <a style="color:white" href="?manager=remove-question&qid=<?= $value['id'] ?>">
+                                        <button class="btn btn-danger btn-xs waves-effect waves-light">
+                                            <i class="fe-x-circle"></i>
+                                        </button>
+                                    </a>
+                                    <a style="color:white" href="?manager=detail-question&qid=<?= $value['id'] ?>">
+                                        <button class="btn btn-success  btn-xs waves-effect waves-light">
+                                            <i class="far fa-eye"></i>
+                                        </button>
+                                    </a>
+                                </td>
+                            </tr>
+                        <?php endforeach ?>
                     </tbody>
                 </table>
                 

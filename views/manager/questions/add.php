@@ -18,19 +18,19 @@
                             <div class="form-group mb-3">
                                 <label for="example-select">Thể loại</label>
                                 <select class="form-control" id="type_input">
-                                    <option>Trắc nghiệm</option>
-                                    <option>Tự luận</option>
-                                    <option>Tổng hợp</option>
+                                    <option value="1">Trắc nghiệm</option>
+                                    <option value="2">Tự luận</option>
+                                    <option value="3">Tổng hợp</option>
                                 </select>
                             </div>
 
                             <div class="form-group mb-3">
                                 <label for="example-select">Độ khó</label>
                                 <select class="form-control" id="rank_input">
-                                    <option>Dễ</option>
-                                    <option>Trung bình</option>
-                                    <option>Khó</option>
-                                    <option>Rất khó</option>
+                                    <option  value="1">Dễ</option>
+                                    <option value="2" >Trung bình</option>
+                                    <option value="3">Khó</option>
+                                    <option  value="4">Rất khó</option>
                                 </select>
                             </div>
 
@@ -82,8 +82,16 @@
                 url: './controller/add_topic.php', 
                 data: dataToSend,
                 success: function(response) {
-                    console.log('Dữ liệu đã được gửi thành công!');
-                    console.log(response); 
+                    
+                    const res = JSON.parse(response);
+                    
+                    console.log(res); 
+
+                    if(res.error_code == 0){
+                        toastr.success('Thêm chủ đề thành công!');
+                    } else {
+                        toastr.error('Có lỗi khi thêm chủ đề!');
+                    }
                 },
                 error: function(error) {
                     console.error('Đã có lỗi xảy ra: ', error);

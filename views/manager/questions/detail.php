@@ -1,3 +1,9 @@
+<?php
+
+    $qid = $_GET['qid'];
+
+?>
+
 <style>
 
     .active-answer *{
@@ -110,28 +116,28 @@
                                     </p>
 
                                     <div class="radio mb-2">
-                                        <input type="radio" name="correctAnswer" id="a" value="optionA" checked="">
+                                        <input type="radio" name="correctAnswer" id="a" value="1" checked="">
                                         <label for="a">
                                             Đáp án A
                                         </label>
                                     </div>
 
                                     <div class="radio mb-2">
-                                        <input type="radio" name="correctAnswer" id="b" value="optionB" checked="">
+                                        <input type="radio" name="correctAnswer" id="b" value="2" checked="">
                                         <label for="b">
                                             Đáp án B
                                         </label>
                                     </div>
 
                                     <div class="radio mb-2">
-                                        <input type="radio" name="correctAnswer" id="c" value="optionC" checked="">
+                                        <input type="radio" name="correctAnswer" id="c" value="3" checked="">
                                         <label for="c">
                                             Đáp án C
                                         </label>
                                     </div>
 
                                     <div class="radio mb-2">
-                                        <input type="radio" name="correctAnswer" id="d" value="optionD" checked="">
+                                        <input type="radio" name="correctAnswer" id="d" value="4" checked="">
                                         <label for="d">
                                             Đáp án D
                                         </label>
@@ -157,6 +163,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" crossorigin="anonymous"></script>
 <script>
 
+    var qid = '<?= $qid ?>';
+
     $(document).ready(function() {
         // Xử lý khi nút "Lưu thông tin" trong modal được click
         $('.btn-submit-data').on('click', function() {
@@ -165,8 +173,11 @@
             var answerA = $('#field-1').val();
             var answerB = $('#field-2').val();
             var answerC = $('#field-3').val();
-            var answerD = $('#field-4').val(); // Lưu ý: field ID của Đáp án D trùng với Đáp án C, cần chỉnh sửa ID để tránh trùng lặp
+            var answerD = $('#field-4').val(); 
             var correctAnswer = $("input[name='correctAnswer']:checked").val();
+
+            var currentDate = new Date();
+            var formattedDate = currentDate.toISOString().split('T')[0];
 
             // Tạo đối tượng chứa thông tin câu hỏi để gửi qua AJAX
             var dataToSend = {
@@ -175,8 +186,9 @@
                 answerB: answerB,
                 answerC: answerC,
                 answerD: answerD,
-                correctAnswer: correctAnswer
-                // Thêm các trường dữ liệu khác nếu cần
+                correctAnswer: correctAnswer,
+                currentDate: formattedDate,
+                qid: qid,
             };
 
             console.log(dataToSend);
