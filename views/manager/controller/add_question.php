@@ -1,8 +1,10 @@
 <?php
 
-    $title = $_POST['title'];
-    $type = $_POST['type'];
-    $rank = $_POST['rank'];
-    $currentDate = $_POST['currentDate'];
+    $question           = $_POST['question'] ;
+    $answerA            = $_POST['answerA'] ;
+    $answerB            = $_POST['answerB'] ;
+    $answerC            = $_POST['answerC'] ;
+    $answerD            = $_POST['answerD'] ;
+    $correctAnswer      = $_POST['correctAnswer'];
 
 ?>

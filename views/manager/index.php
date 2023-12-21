@@ -20,6 +20,9 @@
         <!-- plugin css -->
         <link href="../../assets/libs/jquery-vectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css">
 
+        <!-- Sweet Alert-->
+        <link href="../../assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css">
+
         <!-- App css -->
         <link href="../../assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
         <link href="../../assets/css/icons.min.css" rel="stylesheet" type="text/css">
@@ -230,13 +233,19 @@
             <script src="../../assets/libs/apexcharts/apexcharts.min.js"></script>
             <script src="../../assets/libs/jquery-vectormap/jquery-jvectormap-1.2.2.min.js"></script>
             <script src="../../assets/libs/jquery-vectormap/jquery-jvectormap-us-merc-en.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" crossorigin="anonymous"></script>
+            <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" crossorigin="anonymous"></script> -->
 
             <!-- Dashboard init -->
             <script src="../../assets/js/pages/dashboard-1.init.js"></script>
 
             <!-- App js -->
             <script src="../../assets/js/app.min.js"></script>
+
+             <!-- Sweet Alerts js -->
+            <script src="../../assets/libs/sweetalert2/sweetalert2.min.js"></script>
+
+            <!-- Sweet alert init js-->
+            <script src="../../assets/js/pages/sweet-alerts.init.js"></script>
 
         </div>
         <!-- END wrapper -->

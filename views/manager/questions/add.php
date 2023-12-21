@@ -79,7 +79,7 @@
 
             $.ajax({
                 type: 'POST',
-                url: './controller/add_question.php', 
+                url: './controller/add_topic.php', 
                 data: dataToSend,
                 success: function(response) {
                     console.log('Dữ liệu đã được gửi thành công!');
