@@ -43,12 +43,12 @@
             .item-answer i{
                 font-size: 15px;
             }
-            .#toast-containe{
+            #toast-containe{
                 z-index: 9999;
             }
 
-            .#toast-container *{
-                font-size: 10px
+            #toast-container *{
+                font-size: 13px
             }
 
         </style>
