@@ -1,6 +1,12 @@
 <?php
 
+    require_once("../../config/config.php");
     $qid = $_GET['qid'];
+
+    $sqlGetQuestion = "SELECT * FROM `questions` JOIN topics ON questions.id_topic = topics.id WHERE id_topic = $qid";
+
+    $dataAllQuestion = executeQuery($sqlGetQuestion, true) ?: [];
+    $data = $dataAllQuestion['data'] != null ? $dataAllQuestion['data'] : [];
 
 ?>
 
@@ -20,40 +26,46 @@
 
 <div class="row detail-answer">
     <div class="col-12">
-        <div class="card-box">
-            <div class="question">
-                <h4 class="title-answer">Câu hỏi thứ nhất</h4> 
+
+        <?php foreach ($data as $key => $value) : ?>
+            <div class="card-box">
+                <div class="question">
+                    <h4 class="title-answer"><?= $value['question'] ?></h4> 
+                    
+                    <div>
+                        <button type="button" class="btn btn-xs" data-toggle="modal" data-target="#con-close-modal">
+                            <i class="fas fa-pen-nib"></i>
+                        </button>
+                    </div>
+                </div>
                 
-                <div>
-                    <button type="button" class="btn btn-xs" data-toggle="modal" data-target="#con-close-modal">
-                        <i class="fas fa-pen-nib"></i>
-                    </button>
+                <div class="answer">
+                    <div class="item-answer <?= $value['correctAnswer'] == 1 ? 'active-answer' : '' ?>">
+                        <i class="<?= $value['correctAnswer'] == 1 ? 'fe-check-circle' : 'fe-x-circle' ?>"></i>
+                        <span>A: </span>
+                        <span class="sub-header"><?= $value['answerA'] ?></span>
+                    </div>
+
+                    <div class="item-answer <?= $value['correctAnswer'] == 2 ? 'active-answer' : '' ?>">
+                        <i class="<?= $value['correctAnswer'] == 2 ? 'fe-check-circle' : 'fe-x-circle' ?>"></i>
+                        <span>B: </span>
+                        <span class="sub-header"><?= $value['answerB'] ?></span>
+                    </div>
+
+                    <div class="item-answer <?= $value['correctAnswer'] == 3 ? 'active-answer' : '' ?>">
+                        <i class="<?= $value['correctAnswer'] == 3 ? 'fe-check-circle' : 'fe-x-circle' ?>"></i>
+                        <span>C: </span>
+                        <span class="sub-header"><?= $value['answerC'] ?></span>
+                    </div>
+
+                    <div class="item-answer <?= $value['correctAnswer'] == 4 ? 'active-answer' : '' ?>">
+                        <i class="<?= $value['correctAnswer'] == 4 ? 'fe-check-circle' : 'fe-x-circle' ?>"></i>
+                        <span>D: </span>
+                        <span class="sub-header"><?= $value['answerD'] ?></span>
+                    </div>
                 </div>
             </div>
-            
-            <div class="answer">
-                <div class="item-answer active-answer">
-                    <i class="fe-check-circle"></i>
-                    <span>A: </span>
-                    <span class="sub-header">Default appearance (with optional sortable-switch)</span>
-                </div>
-                <div class="item-answer">
-                    <i class="fe-x-circle"></i>
-                    <span>B: </span>
-                    <span class="sub-header">Default appearance (with optional sortable-switch)</span>
-                </div>
-                <div class="item-answer">
-                    <i class="fe-x-circle"></i>
-                    <span>C: </span>
-                    <span class="sub-header">Default appearance (with optional sortable-switch)</span>
-                </div>
-                <div class="item-answer">
-                    <i class="fe-x-circle"></i>
-                    <span>D: </span>
-                    <span class="sub-header">Default appearance (with optional sortable-switch)</span>
-                </div>
-            </div>
-        </div>
+        <?php endforeach ?>
 
         <div class="card-box">
             <div class="button-list">
@@ -199,7 +211,7 @@
                 data: dataToSend,
                 success: function(response) {
                     console.log('Dữ liệu đã được gửi thành công!');
-                    console.log(response);
+                    location.reload();
                 },
                 error: function(error) {
                     console.error('Đã có lỗi xảy ra: ', error);
