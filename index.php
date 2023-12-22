@@ -8,6 +8,18 @@
             require("./views/client/index.php");
             break;
 
+        case "login":
+            require("./login.php");
+            break;
+
+        case "logout":
+            require("./logout.php");
+            break;
+
+        case "register":
+            require("./register.php");
+            break;
+
         case "manager":
             require("./views/manager/index.php");
             break;

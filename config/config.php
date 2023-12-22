@@ -4,8 +4,8 @@
         $host = "localhost";
         $dbname = "question_database";
         $dbusername = "root";
-        // $dbpwd = "123456";
-        $dbpwd = "";
+        $dbpwd = "123456";
+        // $dbpwd = "";
         
         try {
             $conn = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $dbusername, $dbpwd);
@@ -72,6 +72,14 @@
             default:
                 return 'Không xác định'; // Nếu giá trị không phù hợp
         }
+    }
+
+    function customRound($number) {
+        $rounded = floor($number * 2) / 2;
+        if ($number - $rounded >= 0.5) {
+            $rounded += 0.5;
+        }
+        return $rounded;
     }
 
 ?>

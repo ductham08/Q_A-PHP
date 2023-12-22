@@ -1,7 +1,7 @@
 <?php
 
     require_once("../../config/config.php");
-    $sqlGetQuestion = "SELECT * FROM `topics` ORDER BY 'currentDate' DESC";
+    $sqlGetQuestion = "SELECT * FROM `topics` ORDER BY 'currentDate' ASC";
 
     $dataAllTopic = executeQuery($sqlGetQuestion, true) ?: [];
     $data = $dataAllTopic['data'] != null ? $dataAllTopic['data'] : [];

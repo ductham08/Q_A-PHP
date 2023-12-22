@@ -3,7 +3,7 @@
     require_once("../../config/config.php");
     $qid = $_GET['qid'];
 
-    $sqlGetQuestion = "SELECT * FROM `questions` JOIN topics ON questions.id_topic = topics.id WHERE id_topic = $qid";
+    $sqlGetQuestion = "SELECT questions.id AS id_ques, questions.*, topics.* FROM `questions` JOIN topics ON questions.id_topic = topics.id WHERE id_topic = $qid";
 
     $dataAllQuestion = executeQuery($sqlGetQuestion, true) ?: [];
     $data = $dataAllQuestion['data'] != null ? $dataAllQuestion['data'] : [];
@@ -22,6 +22,22 @@
         justify-content: space-between;
     }
 
+    .radio.radio-success.active *{
+        color: #23b397;
+    }
+
+    .radio.radio-success.warring *{
+        color: #f0643b;
+    }
+
+    .radio.radio-success.warring input[type=radio]:checked+label::after{
+        background-color: #f0643b;
+    }
+
+    .radio.radio-success.warring input[type=radio]:checked+label::before{
+        border-color: #f0643b;
+    }
+
 </style>
 
 <div class="row detail-answer">
@@ -30,32 +46,41 @@
         <?php foreach ($data as $key => $value) : ?>
             <div class="card-box">
                 <div class="question">
-                    <h4 class="title-answer"><?= $value['question'] ?></h4> 
+                    <h4 class="title-answer">Câu <?= $key + 1 ?>. <?= $value['question'] ?></h4> 
                 </div>
                 
                 <div class="answer">
-                    <div class="item-answer <?= $value['correctAnswer'] == 1 ? 'active-answer' : '' ?>">
-                        <i class="<?= $value['correctAnswer'] == 1 ? 'fe-check-circle' : 'fe-x-circle' ?>"></i>
-                        <span>A: </span>
-                        <span class="sub-header"><?= $value['answerA'] ?></span>
-                    </div>
-
-                    <div class="item-answer <?= $value['correctAnswer'] == 2 ? 'active-answer' : '' ?>">
-                        <i class="<?= $value['correctAnswer'] == 2 ? 'fe-check-circle' : 'fe-x-circle' ?>"></i>
-                        <span>B: </span>
-                        <span class="sub-header"><?= $value['answerB'] ?></span>
-                    </div>
-
-                    <div class="item-answer <?= $value['correctAnswer'] == 3 ? 'active-answer' : '' ?>">
-                        <i class="<?= $value['correctAnswer'] == 3 ? 'fe-check-circle' : 'fe-x-circle' ?>"></i>
-                        <span>C: </span>
-                        <span class="sub-header"><?= $value['answerC'] ?></span>
-                    </div>
-
-                    <div class="item-answer <?= $value['correctAnswer'] == 4 ? 'active-answer' : '' ?>">
-                        <i class="<?= $value['correctAnswer'] == 4 ? 'fe-check-circle' : 'fe-x-circle' ?>"></i>
-                        <span>D: </span>
-                        <span class="sub-header"><?= $value['answerD'] ?></span>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="radio radio-success mb-2 answer-item-<?= $value['id_ques'] ?>">
+                                <input type="radio" name="correctAnswer-<?= $key ?>" class="<?= $value['id_ques'] ?>" id="answerA-<?= $key ?>" value="1" checked="">
+                                <label for="answerA-<?= $key ?>">
+                                    <span>A: </span>
+                                    <span class="sub-header"><?= $value['answerA'] ?></span>
+                                </label>
+                            </div>
+                            <div class="radio radio-success mb-2 answer-item-<?= $value['id_ques'] ?>">
+                                <input type="radio" name="correctAnswer-<?= $key ?>" class="<?= $value['id_ques'] ?>" id="answerB-<?= $key ?>" value="2" checked="">
+                                <label for="answerB-<?= $key ?>">
+                                    <span>B: </span>
+                                    <span class="sub-header"><?= $value['answerB'] ?></span>
+                                </label>
+                            </div>
+                            <div class="radio radio-success mb-2 answer-item-<?= $value['id_ques'] ?>">
+                                <input type="radio" name="correctAnswer-<?= $key ?>" class="<?= $value['id_ques'] ?>" id="answerC-<?= $key ?>" value="3" checked="">
+                                <label for="answerC-<?= $key ?>">
+                                    <span>C: </span>
+                                    <span class="sub-header"><?= $value['answerC'] ?></span>
+                                </label>
+                            </div>
+                            <div class="radio radio-success mb-2 answer-item-<?= $value['id_ques'] ?>">
+                                <input type="radio" name="correctAnswer-<?= $key ?>" class="<?= $value['id_ques'] ?>" id="answerD-<?= $key ?>" value="4" checked="">
+                                <label for="answerD-<?= $key ?>">
+                                    <span>D: </span>
+                                    <span class="sub-header"><?= $value['answerD'] ?></span>
+                                </label>
+                            </div>
+                        </div> 
                     </div>
                 </div>
             </div>
@@ -78,45 +103,58 @@
 
     $(document).ready(function() {
         // Xử lý khi nút "Lưu thông tin" trong modal được click
-        $('.btn-submit-data').on('click', function() {
-            // Lấy thông tin từ các input, textarea và radio trong modal
-            var question = $('#question').val();
-            var answerA = $('#field-1').val();
-            var answerB = $('#field-2').val();
-            var answerC = $('#field-3').val();
-            var answerD = $('#field-4').val(); 
-            var correctAnswer = $("input[name='correctAnswer']:checked").val();
+        
+        $('.btn.btn-success').on('click', function() {
 
-            var currentDate = new Date();
-            var formattedDate = currentDate.toISOString().split('T')[0];
+            var selectedAnswers = {};
+            var selectedAnswers = {};
 
-            // Tạo đối tượng chứa thông tin câu hỏi để gửi qua AJAX
-            var dataToSend = {
-                question: question,
-                answerA: answerA,
-                answerB: answerB,
-                answerC: answerC,
-                answerD: answerD,
-                correctAnswer: correctAnswer,
-                currentDate: formattedDate,
-                qid: qid,
-            };
+            $('[name^="correctAnswer-"]').each(function() {
+                var questionIndex = $(this).attr('name').split('-')[1];
+                var questionId = $(this).attr('class');
+                var answer = $('input[name="correctAnswer-' + questionIndex + '"]:checked').val();
+                selectedAnswers[questionIndex] = {
+                    id: questionId,
+                    answer: answer
+                };
+            });
 
-            console.log(dataToSend);
+            const dataSend = {
+                dataAnswer: selectedAnswers,
+                qid: qid
+            }
 
             $.ajax({
                 type: 'POST', 
-                url: './controller/add_question.php',
-                data: dataToSend,
+                url: './controller/check-question.php',
+                data: dataSend,
                 success: function(response) {
-                    console.log('Dữ liệu đã được gửi thành công!');
-                    location.reload();
+                    const res = JSON.parse(response);
+                    const dataQuestion = res.dataQuestion;
+
+                    dataQuestion.map(element => {
+                        var answerItems = $('.answer-item-'+element.id);
+
+                        if(element.resultAnswer == true){
+                            $('.answer-item-'+element.id).removeClass('warring')
+                            $('.answer-item-'+element.id).removeClass('active')
+                            $('.answer-item-'+element.id).eq(element.index - 1).addClass('active')
+                        } else {
+                            $('.answer-item-'+element.id).removeClass('warring')
+                            $('.answer-item-'+element.id).removeClass('active')
+                            $('.answer-item-'+element.id).eq(element.user_index - 1).addClass('warring')
+                        }
+                        
+                    });
+
                 },
                 error: function(error) {
                     console.error('Đã có lỗi xảy ra: ', error);
                 }
             });
+
         });
+
     });
 
 </script>

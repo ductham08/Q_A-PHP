@@ -113,10 +113,10 @@
                                 </a>
                                 <ul class="nav-second-level" aria-expanded="false">
                                     <li>
-                                        <a href="./question.html">Danh sách</a>
+                                        <a href="./index.php">Đề thi</a>
                                     </li>
                                     <li>
-                                        <a href="./question.html">Thêm mới</a>
+                                        <a href="./question.html">Lịch sử</a>
                                     </li>
                                 </ul>
                             </li>
@@ -151,6 +151,10 @@
 
                             case "view-question":
                                 require("./topics/detail.php");
+                                break;
+
+                            case "login":
+                                require("./topics/login.php");
                                 break;
 
                             default:
