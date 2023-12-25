@@ -6,6 +6,7 @@
     $action = isset($_GET["action"]) ? $_GET["action"] : "";
     $user = !empty($_SESSION['user']) ? $_SESSION['user'] : '' ;
 
+    // session_unset();
     // var_dump($user); 
     // die;
 
@@ -28,50 +29,50 @@
             default:
         }
 
-    }
+    } else {
+        switch ($action) {
+            case "":
+                require("./views/client/index.php");
+                break;
     
-    switch ($action) {
-        case "":
-            require("./views/client/index.php");
-            break;
-
-        case "client":
-            require("./views/client/index.php");
-
-        case "view-question":
-            require("./views/client/index.php");
-            break;
-
-        // MANAGER
-        case "manager":
-            require("./views/manager/index.php");
-            break;
-       
-        case "list-topic":
-            require("./views/manager/index.php");
-            break;
-       
-        case "list-users":
-            require("./views/manager/index.php");
-            break;
-       
-        case "add-topic":
-            require("./views/manager/index.php");
-            break;
-       
-        case "detail-question":
-            require("./views/manager/index.php");
-            break;
-       
-        case "detail-user":
-            require("./views/manager/index.php");
-            break;
-       
-        case "remove-question":
-            require("./views/manager/index.php");
-            break;
-
-        default:
+            case "client":
+                require("./views/client/index.php");
+    
+            case "view-question":
+                require("./views/client/index.php");
+                break;
+    
+            // MANAGER
+            case "manager":
+                require("./views/manager/index.php");
+                break;
+           
+            case "list-topic":
+                require("./views/manager/index.php");
+                break;
+           
+            case "list-users":
+                require("./views/manager/index.php");
+                break;
+           
+            case "add-topic":
+                require("./views/manager/index.php");
+                break;
+           
+            case "detail-question":
+                require("./views/manager/index.php");
+                break;
+           
+            case "detail-user":
+                require("./views/manager/index.php");
+                break;
+           
+            case "remove-question":
+                require("./views/manager/index.php");
+                break;
+    
+            default:
+        }
     }
 
 

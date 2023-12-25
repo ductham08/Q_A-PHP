@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 22, 2023 at 11:02 AM
+-- Generation Time: Dec 25, 2023 at 12:02 PM
 -- Server version: 8.0.16
 -- PHP Version: 8.2.4
 
@@ -35,6 +35,15 @@ CREATE TABLE `exam_history` (
   `currentDate` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `exam_history`
+--
+
+INSERT INTO `exam_history` (`id`, `id_user`, `id_topic`, `point`, `currentDate`) VALUES
+(1, 11, 35, 0, '2023-12-25'),
+(2, 11, 35, 0, '2023-12-25'),
+(3, 11, 35, 0, '2023-12-25');
+
 -- --------------------------------------------------------
 
 --
@@ -64,7 +73,8 @@ INSERT INTO `questions` (`id`, `id_topic`, `question`, `answerA`, `answerB`, `an
 (4, 34, 'Provident dignissim', 'Qui ea aliqua Velit', 'Temporibus ex perfer', 'Eum dolores doloremq', 'Modi aut et ipsum co', 1, '2023-12-21'),
 (5, 34, 'Cupidatat architecto', 'Fugit rerum esse co', 'Libero incididunt re', 'Error vitae officiis', 'Libero quia natus id', 2, '2023-12-21'),
 (6, 34, 'Corrupti et culpa ', 'Dolore dolor ut iste', 'Sit incididunt exerc', 'Elit eligendi est ', 'Perspiciatis dolore', 1, '2023-12-21'),
-(7, 35, 'Id tempor voluptatum', 'Eum et blanditiis et', 'Fugit velit illo be', 'Quisquam tempora eum', 'Harum minima rerum q', 2, '2023-12-22');
+(7, 35, 'Id tempor voluptatum', 'Eum et blanditiis et', 'Fugit velit illo be', 'Quisquam tempora eum', 'Harum minima rerum q', 2, '2023-12-22'),
+(8, 35, 'Reprehenderit repudi', 'Do laboris perspicia', 'Et eos quia eum fug', 'Rerum in ad maiores ', 'Qui aliqua Consequa', 2, '2023-12-25');
 
 -- --------------------------------------------------------
 
@@ -86,9 +96,9 @@ CREATE TABLE `topics` (
 --
 
 INSERT INTO `topics` (`id`, `title`, `type`, `rank`, `currentDate`, `id_user`) VALUES
-(34, 'Sunt doloremque libe', 3, 1, '2023-12-21', 1),
 (35, 'Molestias et veritat', 2, 1, '2023-12-21', 1),
-(36, 'Sit est deserunt au', 3, 4, '2023-12-22', 1);
+(36, 'Sit est deserunt au', 3, 4, '2023-12-22', 1),
+(37, 'Sed nulla veritatis ', 3, 4, '2023-12-25', 1);
 
 -- --------------------------------------------------------
 
@@ -102,15 +112,16 @@ CREATE TABLE `users` (
   `full_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `pasword` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `currentDate` date NOT NULL,
-  `avatar` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+  `avatar` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `role` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `email`, `full_name`, `pasword`, `currentDate`, `avatar`) VALUES
-(4, 'admin@gmail.com', 'Còm', 'e10adc3949ba59abbe56e057f20f883e', '2023-12-22', '');
+INSERT INTO `users` (`id`, `email`, `full_name`, `pasword`, `currentDate`, `avatar`, `role`) VALUES
+(11, 'admin@gmail.com', 'Còm', '25f9e794323b453885f5181f1b624d0b', '2023-12-25', '', 0);
 
 --
 -- Indexes for dumped tables
@@ -148,25 +159,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `exam_history`
 --
 ALTER TABLE `exam_history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `questions`
 --
 ALTER TABLE `questions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `topics`
 --
 ALTER TABLE `topics`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

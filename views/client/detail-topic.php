@@ -91,6 +91,10 @@
             </div>
         </div>
 
+        <div id='res-point'>
+            <b style="color: #f0643b;"><span id="point"></span></b>
+        </div>
+
 
     </div>
 </div>
@@ -118,9 +122,13 @@
                 };
             });
 
+            var currentDate = new Date();
+            var formattedDate = currentDate.toISOString().split('T')[0];
+
             const dataSend = {
                 dataAnswer: selectedAnswers,
-                qid: qid
+                qid: qid,
+                currentDate: formattedDate
             }
 
             $.ajax({
@@ -145,6 +153,9 @@
                         }
                         
                     });
+
+                    $('#res-point').addClass('card-box')
+                    $('#point').text('Điểm số: ' + res.point + ' / 10')
 
                 },
                 error: function(error) {

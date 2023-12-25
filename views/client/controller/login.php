@@ -37,16 +37,7 @@
                 'role' => $user['data'][0]['role'],
             ];
 
-            $key = 'ADM_234_RIP';
-            $iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length('aes-256-cbc'));
-
-            $encrypted = openssl_encrypt(json_encode($user), 'AES-256-CBC', $key, 0, $iv);
-
-            // Giải mã dữ liệu
-            // $decrypted = openssl_decrypt($encrypted, 'AES-256-CBC', $key, 0, $iv);
-
-            // var_dump($encrypted);die;
-            $_SESSION['user'] = $encrypted;
+            $_SESSION['user'] = $user;
         }
 
     }

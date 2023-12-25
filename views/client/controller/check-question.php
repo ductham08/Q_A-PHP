@@ -1,8 +1,19 @@
 <?php
 
     require_once("../../../config/config.php");
+    session_start();
+
     $dataAnswer = $_POST['dataAnswer'];
     $qid = $_POST['qid'];
+    $currentDate = $_POST['currentDate'];
+
+    $userSession = !empty($_SESSION['user']) ? $_SESSION['user'] : '' ;
+    $email = $userSession['email'];
+
+    $sqlFindUser = "SELECT * FROM `users` WHERE email = '$email'";
+    $user = executeQuery($sqlFindUser, false);
+
+    $idUser = $user['data']['id'];
 
     $sqlCountQuestion = "SELECT COUNT(*) AS total_questions FROM questions WHERE id_topic = $qid";
     $countQuestion = executeQuery($sqlCountQuestion, false);
@@ -37,7 +48,10 @@
     }
     
     $point = (10 / $totalQuestion) * $countTrue;
-
+    
+    $sqlSaveHistory = "INSERT INTO `exam_history`(`id_user`, `id_topic`, `point`, `currentDate`) VALUES ('$idUser','$qid','$point','$currentDate')";
+    $hisstory = executeQuery($sqlSaveHistory, false);
+    
     $result = [
         'dataQuestion'      => $dataQuestion,
         'point'             => customRound($point)
