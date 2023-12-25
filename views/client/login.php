@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Upvex</title>
+        <title>Upvex - Responsive Admin Dashboard Template</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description">
         <meta content="Coderthemes" name="author">
@@ -34,17 +34,13 @@
                                     <p></p>
                                 </div>
 
-                                <h5 class="auth-title">Đăng ký</h5>
+                                <h5 class="auth-title">Đăng Nhập</h5>
 
                                 <form id="loginForm" action="#">
 
                                     <div class="form-group">
                                         <p id="error" style="color: #f0643b;" ></p>
-                                    </div>
-
-                                    <div class="form-group mb-3">
-                                        <label for="username">Họ và tên</label>
-                                        <input class="form-control" type="text" id="username" required="" placeholder="Nhập họ và tên">
+                                        <p id="success" style="color: #1d937c;" ></p>
                                     </div>
 
                                     <div class="form-group mb-3">
@@ -57,19 +53,14 @@
                                         <input class="form-control" type="password" required="" id="password" placeholder="Nhập mật khẩu">
                                     </div>
 
-                                    <div class="form-group mb-3">
-                                        <label for="repassword">Xác nhận mật khẩu</label>
-                                        <input class="form-control" type="password" required="" id="repassword" placeholder="Nhập lại mật khẩu">
-                                    </div>
-
                                     <div class="form-group mb-0 text-center">
-                                        <button class="btn btn-danger btn-block" type="submit"> Đăng ký </button>
+                                        <button class="btn btn-danger btn-block" type="submit"> Đăng nhập </button>
                                     </div>
 
                                 </form>
 
                                 <div class="text-center">
-                                    <p class="mt-3 text-muted">Hoặc đăng ký với</p>
+                                    <p class="mt-3 text-muted">Hoặc đăng nhập với</p>
                                     <ul class="social-list list-inline mt-3 mb-0">
                                         <li class="list-inline-item">
                                             <a href="javascript: void(0);" class="social-list-item border-primary text-primary"><i class="mdi mdi-facebook"></i></a>
@@ -93,7 +84,7 @@
                         <div class="row mt-3">
                             <div class="col-12 text-center">
                                 <p> <a href="pages-recoverpw.html" class="text-muted ml-1">Quên mật khẩu?</a></p>
-                                <p class="text-muted">Bạn đã có tài khoản? <a href="pages-register.html" class="text-muted ml-1"><b class="font-weight-semibold">Đăng nhập</b></a></p>
+                                <p class="text-muted">Chưa có tài khoản? <a href="./?action=register" class="text-muted ml-1"><b class="font-weight-semibold">Đăng ký</b></a></p>
                             </div> <!-- end col -->
                         </div>
                         <!-- end row -->
@@ -122,34 +113,38 @@
         <script>
 
             $('#loginForm').submit(function(event) {
+                    // Chặn hành vi mặc định của form (gửi form)
                     event.preventDefault();
 
-                    var username    = $('#username').val();
-                    var email       = $('#emailaddress').val();
-                    var password    = $('#password').val();
-                    var repassword  = $('#repassword').val();
+                    // Lấy giá trị từ các trường input
+                    var email = $('#emailaddress').val();
+                    var password = $('#password').val();
 
-                    var currentDate = new Date();
-                    var formattedDate = currentDate.toISOString().split('T')[0];
-
-                    if (password != repassword) {
-                        $('#error').text('Mật khẩu xác nhận không chính xác');
-                    } else
-
-                    $dataSend = {
+                    const dataSend = {
                         email       : email,
-                        username    : username,
                         password    : password,
-                        currentDate: formattedDate
                     }
 
-                    // Tiếp tục xử lý dữ liệu, ví dụ: gửi thông tin đăng ký lên server bằng Ajax
+                    // Tiếp tục xử lý dữ liệu, ví dụ: gửi thông tin đăng nhập lên server bằng Ajax
                     $.ajax({
                         type: 'POST',
                         url: './views/client/controller/login.php',
-                        data: $dataSend,
+                        data: dataSend,
                         success: function(response) {
-                            console.log(response);
+                            
+                            const res = JSON.parse(response);
+
+                            if(res.error_code == 0){
+                                $('#success').text( res.message );
+                                $('#error').text('');
+                                setTimeout(() => {
+                                    window.location.href = './'
+                                }, 3000);
+                            } else {
+                                $('#error').text( res.message );
+                                $('#success').text('');
+                            }
+
                         },
                         error: function(error) {
                             // Xử lý lỗi nếu có

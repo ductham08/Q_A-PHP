@@ -1,7 +1,6 @@
 <?php
 
     require_once("../../../config/config.php");
-
     $dataAnswer = $_POST['dataAnswer'];
     $qid = $_POST['qid'];
 

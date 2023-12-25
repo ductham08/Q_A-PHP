@@ -79,7 +79,7 @@
 
             $.ajax({
                 type: 'POST',
-                url: './controller/add_topic.php', 
+                url: './views/manager/controller/add_topic.php', 
                 data: dataToSend,
                 success: function(response) {
                     

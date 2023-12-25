@@ -1,11 +1,4 @@
-﻿<?php
-
-    require_once("../../config/config.php");
-
-    $manager = isset($_GET["manager"]) ? $_GET["manager"] : "";
-
-?>
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
@@ -15,18 +8,18 @@
         <meta content="Coderthemes" name="author">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-        <link rel="shortcut icon" href="../../assets/images/favicon.ico">
+        <link rel="shortcut icon" href="./assets/images/favicon.ico">
 
         <!-- plugin css -->
-        <link href="../../assets/libs/jquery-vectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css">
+        <link href="./assets/libs/jquery-vectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css">
 
         <!-- Sweet Alert-->
-        <link href="../../assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css">
+        <link href="./assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css">
 
         <!-- App css -->
-        <link href="../../assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-        <link href="../../assets/css/icons.min.css" rel="stylesheet" type="text/css">
-        <link href="../../assets/css/app.min.css" rel="stylesheet" type="text/css">
+        <link href="./assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+        <link href="./assets/css/icons.min.css" rel="stylesheet" type="text/css">
+        <link href="./assets/css/app.min.css" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
         <style>
@@ -51,6 +44,14 @@
                 font-size: 13px
             }
 
+            .content table td{
+                font-size: 0.85rem;
+            }
+
+            .content table th{
+                font-size: 0.9rem;
+            }
+
         </style>
     </head>
 
@@ -64,7 +65,7 @@
 
                     <li class="dropdown notification-list">
                         <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                            <img src="../../assets/images/users/user-1.jpg" alt="user-image" class="rounded-circle">
+                            <img src="./assets/images/users/user-1.jpg" alt="user-image" class="rounded-circle">
                             <span class="pro-user-name ml-1">Còm<i class="mdi mdi-chevron-down"></i> 
                             </span>
                         </a>
@@ -98,12 +99,12 @@
                 <div class="logo-box">
                     <a href="index.html" class="logo text-center">
                         <span class="logo-lg">
-                            <img src="../../assets/images/logo-light.png" alt="" height="24">
+                            <img src="./assets/images/logo-light.png" alt="" height="24">
                             <!-- <span class="logo-lg-text-light">Upvex</span> -->
                         </span>
                         <span class="logo-sm">
                             <!-- <span class="logo-sm-text-dark">X</span> -->
-                            <img src="../../assets/images/logo-sm.png" alt="" height="28">
+                            <img src="./assets/images/logo-sm.png" alt="" height="28">
                         </span>
                     </a>
                 </div>
@@ -137,12 +138,12 @@
                                 </a>
                                 <ul class="nav-second-level" aria-expanded="false">
                                     <li>
-                                        <a href="./?manager=list-topic">
+                                        <a href="./?action=list-topic">
                                             <span>Danh sách</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="./?manager=add-topic">
+                                        <a href="./?action=add-topic">
                                             <span>Thêm mới</span>
                                         </a>
                                     </li>
@@ -156,7 +157,7 @@
                                 </a>
                                 <ul class="nav-second-level" aria-expanded="false">
                                     <li>
-                                        <a href="./?manager=list-users">Danh sách</a>
+                                        <a href="./?action=list-users">Danh sách</a>
                                     </li>
                                     <li>
                                         <a href="">Phân quyền</a>
@@ -187,29 +188,31 @@
                 <div class="content" style="padding: 15px 0 0 0">
                     
                     <?php
-                        switch ($manager) {
+                        $action = isset($_GET["action"]) ? $_GET["action"] : "";
+
+                        switch ($action) {
                             case "list-topic":
-                                require("./questions/list.php");
+                                require("./views/manager/questions/list.php");
                                 break;
 
                             case "add-topic":
-                                require("./questions/add.php");
+                                require("./views/manager/questions/add.php");
                                 break;
 
                             case "detail-question":
-                                require("./questions/detail.php");
+                                require("./views/manager/questions/detail.php");
                                 break;
 
                             case "remove-question":
-                                require("./questions/remove.php");
+                                require("./views/manager/questions/remove.php");
                                 break;
 
                             case "list-users":
-                                require("./users/list.php");
+                                require("./views/manager/users/list.php");
                                 break;
 
                             case "detail-user":
-                                require("./users/list.php");
+                                require("./views/manager/users/list.php");
                                 break;
 
                             default:
@@ -239,27 +242,27 @@
 
                         
             <!-- Vendor js -->
-            <script src="../../assets/js/vendor.min.js"></script>
+            <script src="./assets/js/vendor.min.js"></script>
             <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
             <!-- Third Party js-->
-            <script src="../../assets/libs/peity/jquery.peity.min.js"></script>
-            <script src="../../assets/libs/apexcharts/apexcharts.min.js"></script>
-            <script src="../../assets/libs/jquery-vectormap/jquery-jvectormap-1.2.2.min.js"></script>
-            <script src="../../assets/libs/jquery-vectormap/jquery-jvectormap-us-merc-en.js"></script>
+            <script src="./assets/libs/peity/jquery.peity.min.js"></script>
+            <script src="./assets/libs/apexcharts/apexcharts.min.js"></script>
+            <script src="./assets/libs/jquery-vectormap/jquery-jvectormap-1.2.2.min.js"></script>
+            <script src="./assets/libs/jquery-vectormap/jquery-jvectormap-us-merc-en.js"></script>
             <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" crossorigin="anonymous"></script> -->
 
             <!-- Dashboard init -->
-            <script src="../../assets/js/pages/dashboard-1.init.js"></script>
+            <script src="./assets/js/pages/dashboard-1.init.js"></script>
 
             <!-- App js -->
-            <script src="../../assets/js/app.min.js"></script>
+            <script src="./assets/js/app.min.js"></script>
 
              <!-- Sweet Alerts js -->
-            <script src="../../assets/libs/sweetalert2/sweetalert2.min.js"></script>
+            <script src="./assets/libs/sweetalert2/sweetalert2.min.js"></script>
 
             <!-- Sweet alert init js-->
-            <script src="../../assets/js/pages/sweet-alerts.init.js"></script>
+            <script src="./assets/js/pages/sweet-alerts.init.js"></script>
 
         </div>
         <!-- END wrapper -->

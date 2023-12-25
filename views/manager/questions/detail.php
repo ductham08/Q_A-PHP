@@ -1,6 +1,5 @@
 <?php
 
-    require_once("../../config/config.php");
     $qid = $_GET['qid'];
 
     $sqlGetQuestion = "SELECT * FROM `questions` JOIN topics ON questions.id_topic = topics.id WHERE id_topic = $qid";
@@ -207,7 +206,7 @@
 
             $.ajax({
                 type: 'POST', 
-                url: './controller/add_question.php',
+                url: './views/manager/controller/add_question.php',
                 data: dataToSend,
                 success: function(response) {
                     console.log('Dữ liệu đã được gửi thành công!');

@@ -1,6 +1,5 @@
 <?php
 
-    require_once("../../config/config.php");
     $qid = $_GET['qid'];
 
     $sqlGetQuestion = "SELECT questions.id AS id_ques, questions.*, topics.* FROM `questions` JOIN topics ON questions.id_topic = topics.id WHERE id_topic = $qid";
@@ -126,7 +125,7 @@
 
             $.ajax({
                 type: 'POST', 
-                url: './controller/check-question.php',
+                url: './views/client/controller/check-question.php',
                 data: dataSend,
                 success: function(response) {
                     const res = JSON.parse(response);

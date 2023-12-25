@@ -1,58 +1,87 @@
 <?php
-    require ("./config/link.php");
-    require ("./config/config.php");
+    require_once("./config/config.php");
+
+    session_start();
 
     $action = isset($_GET["action"]) ? $_GET["action"] : "";
+    $user = !empty($_SESSION['user']) ? $_SESSION['user'] : '' ;
+
+    // var_dump($user); 
+    // die;
+
+
+    if(empty($user)){
+
+        switch ($action) {
+            case "":
+                require("./views/client/login.php");
+                break;
+
+            case "login":
+                require("./views/client/login.php");
+                break;
+                
+            case "logout":
+                require("./views/client/logout.php");
+                break;
+                    
+            default:
+        }
+
+    }
+    
     switch ($action) {
         case "":
             require("./views/client/index.php");
             break;
 
-        case "login":
-            require("./login.php");
+        case "client":
+            require("./views/client/index.php");
+
+        case "view-question":
+            require("./views/client/index.php");
             break;
 
-        case "logout":
-            require("./logout.php");
-            break;
-
-        case "register":
-            require("./register.php");
-            break;
-
+        // MANAGER
         case "manager":
+            require("./views/manager/index.php");
+            break;
+       
+        case "list-topic":
+            require("./views/manager/index.php");
+            break;
+       
+        case "list-users":
+            require("./views/manager/index.php");
+            break;
+       
+        case "add-topic":
+            require("./views/manager/index.php");
+            break;
+       
+        case "detail-question":
+            require("./views/manager/index.php");
+            break;
+       
+        case "detail-user":
+            require("./views/manager/index.php");
+            break;
+       
+        case "remove-question":
             require("./views/manager/index.php");
             break;
 
         default:
     }
+
+
+    
 ?>
 
-<link rel="shortcut icon" href="assets\images\favicon.ico">
-
-<!-- plugin css -->
-<link href="assets\libs\jquery-vectormap\jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css">
-
-<!-- App css -->
-<link href="assets\css\bootstrap.min.css" rel="stylesheet" type="text/css">
-<link href="assets\css\icons.min.css" rel="stylesheet" type="text/css">
-<link href="assets\css\app.min.css" rel="stylesheet" type="text/css">
-
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-
-
-<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-<!-- Vendor js -->
-<script src="assets\js\vendor.min.js"></script>
-
-<!-- Third Party js-->
-<script src="assets\libs\peity\jquery.peity.min.js"></script>
-<script src="assets\libs\apexcharts\apexcharts.min.js"></script>
-<script src="assets\libs\jquery-vectormap\jquery-jvectormap-1.2.2.min.js"></script>
-<script src="assets\libs\jquery-vectormap\jquery-jvectormap-us-merc-en.js"></script>
-
-<!-- Dashboard init -->
-<script src="assets\js\pages\dashboard-1.init.js"></script>
-
-<!-- App js -->
-<script src="assets\js\app.min.js"></script>
+<style>
+    .logo-box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+</style>

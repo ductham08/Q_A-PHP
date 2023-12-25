@@ -1,7 +1,6 @@
 <?php
 
-    require_once("../../config/config.php");
-    $sqlGetQuestion = "SELECT * FROM `topics` ORDER BY 'currentDate' ASC";
+    $sqlGetQuestion = "SELECT * FROM `topics` ORDER BY 'currentDate' DESC";
 
     $dataAllTopic = executeQuery($sqlGetQuestion, true) ?: [];
     $data = $dataAllTopic['data'] != null ? $dataAllTopic['data'] : [];
@@ -40,12 +39,12 @@
                                 <td><?= $value['currentDate'] ?></td>
                                 <td><?= formatQuestionRank($value['rank']) ?></td>
                                 <td>
-                                    <a style="color:white" href="?manager=remove-question&qid=<?= $value['id'] ?>">
+                                    <a style="color:white" href="?action=remove-question&qid=<?= $value['id'] ?>">
                                         <button class="btn btn-danger btn-xs waves-effect waves-light">
                                             <i class="fe-x-circle"></i>
                                         </button>
                                     </a>
-                                    <a style="color:white" href="?manager=detail-question&qid=<?= $value['id'] ?>">
+                                    <a style="color:white" href="?action=detail-question&qid=<?= $value['id'] ?>">
                                         <button class="btn btn-success  btn-xs waves-effect waves-light">
                                             <i class="far fa-eye"></i>
                                         </button>

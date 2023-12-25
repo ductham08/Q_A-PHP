@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Upvex - Responsive Admin Dashboard Template</title>
+        <title>Upvex</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description">
         <meta content="Coderthemes" name="author">
@@ -34,12 +34,18 @@
                                     <p></p>
                                 </div>
 
-                                <h5 class="auth-title">Đăng Nhập</h5>
+                                <h5 class="auth-title">Đăng ký</h5>
 
                                 <form id="loginForm" action="#">
 
                                     <div class="form-group">
-                                        <p id="error" style="color: #f0643b;" >Sai thông tin tài khoản hoặc mật khẩu!</p>
+                                        <p id="error" style="color: #f0643b;" ></p>
+                                        <p id="success" style="color: #1d937c;" ></p>
+                                    </div>
+
+                                    <div class="form-group mb-3">
+                                        <label for="username">Họ và tên</label>
+                                        <input class="form-control" type="text" id="username" required="" placeholder="Nhập họ và tên">
                                     </div>
 
                                     <div class="form-group mb-3">
@@ -52,14 +58,19 @@
                                         <input class="form-control" type="password" required="" id="password" placeholder="Nhập mật khẩu">
                                     </div>
 
+                                    <div class="form-group mb-3">
+                                        <label for="repassword">Xác nhận mật khẩu</label>
+                                        <input class="form-control" type="password" required="" id="repassword" placeholder="Nhập lại mật khẩu">
+                                    </div>
+
                                     <div class="form-group mb-0 text-center">
-                                        <button class="btn btn-danger btn-block" type="submit"> Đăng nhập </button>
+                                        <button class="btn btn-danger btn-block" type="submit"> Đăng ký </button>
                                     </div>
 
                                 </form>
 
                                 <div class="text-center">
-                                    <p class="mt-3 text-muted">Hoặc đăng nhập với</p>
+                                    <p class="mt-3 text-muted">Hoặc đăng ký với</p>
                                     <ul class="social-list list-inline mt-3 mb-0">
                                         <li class="list-inline-item">
                                             <a href="javascript: void(0);" class="social-list-item border-primary text-primary"><i class="mdi mdi-facebook"></i></a>
@@ -83,7 +94,7 @@
                         <div class="row mt-3">
                             <div class="col-12 text-center">
                                 <p> <a href="pages-recoverpw.html" class="text-muted ml-1">Quên mật khẩu?</a></p>
-                                <p class="text-muted">Chưa có tài khoản? <a href="pages-register.html" class="text-muted ml-1"><b class="font-weight-semibold">Đăng ký</b></a></p>
+                                <p class="text-muted">Bạn đã có tài khoản? <a href="./?action=login" class="text-muted ml-1"><b class="font-weight-semibold">Đăng nhập</b></a></p>
                             </div> <!-- end col -->
                         </div>
                         <!-- end row -->
@@ -112,29 +123,48 @@
         <script>
 
             $('#loginForm').submit(function(event) {
-                    // Chặn hành vi mặc định của form (gửi form)
                     event.preventDefault();
 
-                    // Lấy giá trị từ các trường input
-                    var email = $('#emailaddress').val();
-                    var password = $('#password').val();
+                    var username    = $('#username').val();
+                    var email       = $('#emailaddress').val();
+                    var password    = $('#password').val();
+                    var repassword  = $('#repassword').val();
 
-                    // In thông tin lấy được từ input ra console để kiểm tra
-                    console.log('Email:', email);
-                    console.log('Mật khẩu:', password);
+                    var currentDate = new Date();
+                    var formattedDate = currentDate.toISOString().split('T')[0];
 
-                    // Tiếp tục xử lý dữ liệu, ví dụ: gửi thông tin đăng nhập lên server bằng Ajax
-                    // $.ajax({
-                    //     type: 'POST',
-                    //     url: 'url_to_your_login_endpoint',
-                    //     data: { email: email, password: password },
-                    //     success: function(response) {
-                    //         // Xử lý phản hồi từ server sau khi đăng nhập thành công hoặc thất bại
-                    //     },
-                    //     error: function(error) {
-                    //         // Xử lý lỗi nếu có
-                    //     }
-                    // });
+                    if (password != repassword) {
+                        $('#error').text('Mật khẩu xác nhận không chính xác');
+                    } else
+
+                    $dataSend = {
+                        email       : email,
+                        username    : username,
+                        password    : password,
+                        currentDate: formattedDate
+                    }
+
+                    // Tiếp tục xử lý dữ liệu, ví dụ: gửi thông tin đăng ký lên server bằng Ajax
+                    $.ajax({
+                        type: 'POST',
+                        url: './views/client/controller/register.php',
+                        data: $dataSend,
+                        success: function(response) {
+
+                            const res = JSON.parse(response);
+                            if(res.error_code == 0){
+                                $('#success').text( res.message );
+                                $('#error').text('');
+                            } else {
+                                $('#error').text( res.message );
+                                $('#success').text('');
+                            }
+
+                        },
+                        error: function(error) {
+                            // Xử lý lỗi nếu có
+                        }
+                    });
                 });
 
         </script>
