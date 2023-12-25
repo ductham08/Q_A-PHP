@@ -123,7 +123,7 @@
                                         <a href="./index.php">Đề thi</a>
                                     </li>
                                     <li>
-                                        <a href="./question.html">Lịch sử</a>
+                                        <a href="?action=history">Lịch sử</a>
                                     </li>
                                 </ul>
                             </li>
@@ -158,6 +158,10 @@
 
                             case "view-question":
                                 require("./views/client/detail-topic.php");
+                                break;
+
+                            case "history":
+                                require("./views/client/history.php");
                                 break;
 
                             default:

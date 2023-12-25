@@ -41,6 +41,10 @@
             case "view-question":
                 require("./views/client/index.php");
                 break;
+                
+            case "history":
+                require("./views/client/index.php");
+                break;
     
             // MANAGER
             case "manager":
@@ -70,6 +74,7 @@
             case "remove-question":
                 require("./views/manager/index.php");
                 break;
+           
     
             default:
         }

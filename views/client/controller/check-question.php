@@ -48,8 +48,10 @@
     }
     
     $point = (10 / $totalQuestion) * $countTrue;
-    
-    $sqlSaveHistory = "INSERT INTO `exam_history`(`id_user`, `id_topic`, `point`, `currentDate`) VALUES ('$idUser','$qid','$point','$currentDate')";
+    $pointCus = customRound($point);
+    $dataJson = serialize($dataAnswer);
+
+    $sqlSaveHistory = "INSERT INTO `exam_history`(`id_user`, `id_topic`, `point`, `data`, `currentDate`) VALUES ('$idUser', '$qid', '$pointCus', '$dataJson', '$currentDate')";
     $hisstory = executeQuery($sqlSaveHistory, false);
     
     $result = [

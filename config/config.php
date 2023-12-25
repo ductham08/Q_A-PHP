@@ -4,8 +4,8 @@
         $host = "localhost";
         $dbname = "question_database";
         $dbusername = "root";
-        $dbpwd = "123456";
-        // $dbpwd = "";
+        // $dbpwd = "123456";
+        $dbpwd = "";
         
         try {
             $conn = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $dbusername, $dbpwd);
