@@ -2,12 +2,14 @@
     require_once("./config/config.php");
 
     $action = isset($_GET["action"]) ? $_GET["action"] : "";
-    $user = !empty($_SESSION['user']) ? $_SESSION['user'] : '' ;
 
-    // var_dump($user);die;
-    // if(empty($user)){
-    //     header("Location: ../../?action=login");
-    // }
+    
+    $userSession = !empty($_SESSION['user']) ? $_SESSION['user'] : '' ;
+    $email = $userSession['email'];
+    // var_dump($userSession);die;
+
+    $sqlFindUser = "SELECT * FROM `users` WHERE email = '$email'";
+    $user = executeQuery($sqlFindUser, false);
 
 ?>
 <!DOCTYPE html>
@@ -48,7 +50,7 @@
                     <li class="dropdown notification-list">
                         <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                             <img src="./assets/images/users/user-1.jpg" alt="user-image" class="rounded-circle">
-                            <span class="pro-user-name ml-1">Còm<i class="mdi mdi-chevron-down"></i> 
+                            <span class="pro-user-name ml-1"><?=  $user['data']['full_name'] ?><i class="mdi mdi-chevron-down"></i> 
                             </span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
@@ -67,7 +69,7 @@
                             <div class="dropdown-divider"></div>
 
                             <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
+                            <a href="./?action=logout" class="dropdown-item notify-item">
                                 <i class="fe-log-out"></i>
                                 <span>Đăng xuất</span>
                             </a>
@@ -128,6 +130,17 @@
                                 </ul>
                             </li>
 
+                            <?php if ($userSession['role'] == 1) :?>
+                                <li>
+                                    <a href="./?action=manager">
+                                        <i class="fe-layers"></i>
+                                        <span> Dashboard </span>
+                                    </a>
+                                </li>
+                            <?php endif ?>
+
+                           
+
                         </ul>
 
                     </div>
@@ -161,7 +174,11 @@
                                 break;
 
                             case "history":
-                                require("./views/client/history.php");
+                                require("./views/client/list-history.php");
+                                break;
+
+                            case "logout":
+                                require("./views/client/logout.php");
                                 break;
 
                             default:
@@ -192,29 +209,6 @@
 
         </div>
         <!-- END wrapper -->
-
-        <!-- Vendor js -->
-        <script src="./assets/js/vendor.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-
-        <!-- Third Party js-->
-        <script src="./assets/libs/peity/jquery.peity.min.js"></script>
-        <script src="./assets/libs/apexcharts/apexcharts.min.js"></script>
-        <script src="./assets/libs/jquery-vectormap/jquery-jvectormap-1.2.2.min.js"></script>
-        <script src="./assets/libs/jquery-vectormap/jquery-jvectormap-us-merc-en.js"></script>
-        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" crossorigin="anonymous"></script> -->
-
-        <!-- Dashboard init -->
-        <script src="./assets/js/pages/dashboard-1.init.js"></script>
-
-        <!-- App js -->
-        <script src="./assets/js/app.min.js"></script>
-
-            <!-- Sweet Alerts js -->
-        <script src="./assets/libs/sweetalert2/sweetalert2.min.js"></script>
-
-        <!-- Sweet alert init js-->
-        <script src="./assets/js/pages/sweet-alerts.init.js"></script>
         
     </body>
 </html>

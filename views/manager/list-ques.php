@@ -1,6 +1,6 @@
 <?php
 
-    $sqlGetQuestion = "SELECT * FROM `topics` ORDER BY 'currentDate' DESC";
+    $sqlGetQuestion = "SELECT topics.*, topics.id as id_topic, topics.currentDate as currentDateTopic, questions.*, COUNT(questions.id) AS so_luong_cau_hoi FROM topics LEFT JOIN questions ON topics.id = questions.id_topic GROUP BY topics.id";
 
     $dataAllTopic = executeQuery($sqlGetQuestion, true) ?: [];
     $data = $dataAllTopic['data'] != null ? $dataAllTopic['data'] : [];
@@ -24,6 +24,7 @@
                             <th>Thể loại</th>
                             <th>Người tạo</th>
                             <th>Ngày tạo</th>
+                            <th>Số câu hỏi</th>
                             <th>Mức độ</th>
                             <th>Action</th>
                         </tr>
@@ -36,15 +37,16 @@
                                 <td><?= $value['title'] ?></td>
                                 <td><?= formatQuestionType($value['type']) ?></td>
                                 <td>Còm</td>
-                                <td><?= $value['currentDate'] ?></td>
+                                <td><?= $value['currentDateTopic'] ?></td>
+                                <td><?= $value['so_luong_cau_hoi'] ?></td>
                                 <td><?= formatQuestionRank($value['rank']) ?></td>
                                 <td>
-                                    <a style="color:white" href="?action=remove-question&qid=<?= $value['id'] ?>">
+                                    <a style="color:white" href="?action=remove-question&qid=<?= $value[0] ?>">
                                         <button class="btn btn-danger btn-xs waves-effect waves-light">
                                             <i class="fe-x-circle"></i>
                                         </button>
                                     </a>
-                                    <a style="color:white" href="?action=detail-question&qid=<?= $value['id'] ?>">
+                                    <a style="color:white" href="?action=detail-question&qid=<?= $value[0] ?>">
                                         <button class="btn btn-success  btn-xs waves-effect waves-light">
                                             <i class="far fa-eye"></i>
                                         </button>

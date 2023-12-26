@@ -1,11 +1,17 @@
 ﻿<?php
 
     $qid = $_GET['qid'];
+    $id = $_GET['id'];
 
-    $sqlGetQuestion = "SELECT questions.id AS id_ques, questions.*, topics.* FROM `questions` JOIN topics ON questions.id_topic = topics.id WHERE id_topic = $qid";
+    $sqlGetQuestion = "SELECT questions.id AS id_ques, questions.*, exam_history.* FROM `exam_history` JOIN questions ON questions.id_topic = exam_history.id_topic WHERE exam_history.id = $id AND questions.id_topic = $qid";
 
     $dataAllQuestion = executeQuery($sqlGetQuestion, true) ?: [];
     $data = $dataAllQuestion['data'] != null ? $dataAllQuestion['data'] : [];
+
+    $dataUnz = unserialize($data[0]['data']);
+
+    $dataMerge = array_merge($data, $dataUnz);
+
 
 ?>
 
@@ -42,7 +48,14 @@
 <div class="row detail-answer">
     <div class="col-12">
 
+        <div class="card-box">
+            <span>
+                <b>Điểm số: 1 / 10</b>
+            </span>
+        </div>
+
         <?php foreach ($data as $key => $value) : ?>
+            
             <div class="card-box">
                 <div class="question">
                     <h4 class="title-answer">Câu <?= $key + 1 ?>. <?= $value['question'] ?></h4> 
@@ -51,29 +64,29 @@
                 <div class="answer">
                     <div class="row">
                         <div class="col-sm-6">
-                            <div class="radio radio-success mb-2 answer-item-<?= $value['id_ques'] ?>">
-                                <input disabled="true" type="radio" name="correctAnswer-<?= $key ?>" class="<?= $value['id_ques'] ?>" id="answerA-<?= $key ?>" value="1" checked="">
+                            <div class="radio radio-success mb-2 answer-item-<?= $value['id_ques'] ?> <?= $value['correctAnswer'] == 1 ? 'active' : '' ?> ">
+                                <input disabled='true' type="radio" name="correctAnswer-<?= $key ?>" class="<?= $value['id_ques'] ?>" id="answerA-<?= $key ?>" value="1" <?= $value['correctAnswer'] == 1 ? 'checked' : '' ?> >
                                 <label for="answerA-<?= $key ?>">
                                     <span>A: </span>
                                     <span class="sub-header"><?= $value['answerA'] ?></span>
                                 </label>
                             </div>
-                            <div class="radio radio-success mb-2 answer-item-<?= $value['id_ques'] ?>">
-                                <input disabled="true" type="radio" name="correctAnswer-<?= $key ?>" class="<?= $value['id_ques'] ?>" id="answerB-<?= $key ?>" value="2" checked="">
+                            <div class="radio radio-success mb-2 answer-item-<?= $value['id_ques'] ?> <?= $value['correctAnswer'] == 2 ? 'active' : '' ?>">
+                                <input disabled='true' type="radio" name="correctAnswer-<?= $key ?>" class="<?= $value['id_ques'] ?>" id="answerB-<?= $key ?>" value="2" <?= $value['correctAnswer'] == 2 ? 'checked' : '' ?>>
                                 <label for="answerB-<?= $key ?>">
                                     <span>B: </span>
                                     <span class="sub-header"><?= $value['answerB'] ?></span>
                                 </label>
                             </div>
-                            <div class="radio radio-success mb-2 answer-item-<?= $value['id_ques'] ?>">
-                                <input disabled="true" type="radio" name="correctAnswer-<?= $key ?>" class="<?= $value['id_ques'] ?>" id="answerC-<?= $key ?>" value="3" checked="">
+                            <div class="radio radio-success mb-2 answer-item-<?= $value['id_ques'] ?> <?= $value['correctAnswer'] == 3 ? 'active' : '' ?>">
+                                <input disabled='true' type="radio" name="correctAnswer-<?= $key ?>" class="<?= $value['id_ques'] ?>" id="answerC-<?= $key ?>" value="3" <?= $value['correctAnswer'] == 3 ? 'checked' : '' ?>>
                                 <label for="answerC-<?= $key ?>">
                                     <span>C: </span>
                                     <span class="sub-header"><?= $value['answerC'] ?></span>
                                 </label>
                             </div>
-                            <div class="radio radio-success mb-2 answer-item-<?= $value['id_ques'] ?>">
-                                <input disabled="true" type="radio" name="correctAnswer-<?= $key ?>" class="<?= $value['id_ques'] ?>" id="answerD-<?= $key ?>" value="4" checked="">
+                            <div class="radio radio-success mb-2 answer-item-<?= $value['id_ques'] ?> <?= $value['correctAnswer'] == 4 ? 'active' : '' ?>">
+                                <input disabled='true' type="radio" name="correctAnswer-<?= $key ?>" class="<?= $value['id_ques'] ?>" id="answerD-<?= $key ?>" value="4" <?= $value['correctAnswer'] == 4 ? 'checked' : '' ?>>
                                 <label for="answerD-<?= $key ?>">
                                     <span>D: </span>
                                     <span class="sub-header"><?= $value['answerD'] ?></span>
@@ -82,97 +95,11 @@
                         </div> 
                     </div>
                 </div>
+
             </div>
         <?php endforeach ?>
-
-        <div class="card-box">
-            <div class="button-list">
-                <button id='btn-submit' type="button" class="btn btn-success waves-effect waves-light">Hoàn thành</button>
-            </div>
-        </div>
-
-        <div id='res-point'>
-            <b style="color: #f0643b;"><span id="point"></span></b>
-        </div>
-
 
     </div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" crossorigin="anonymous"></script>
-<script>
-
-    var qid = '<?= $qid ?>';
-
-    $(document).ready(function() {
-        // Xử lý khi nút "Lưu thông tin" trong modal được click
-        
-        $('.btn.btn-success').on('click', function() {
-
-            var selectedAnswers = {};
-            var selectedAnswers = {};
-
-            $('[name^="correctAnswer-"]').each(function() {
-                var questionIndex = $(this).attr('name').split('-')[1];
-                var questionId = $(this).attr('class');
-                var answer = $('input[name="correctAnswer-' + questionIndex + '"]:checked').val();
-                selectedAnswers[questionIndex] = {
-                    id: questionId,
-                    answer: answer
-                };
-            });
-
-            var currentDate = new Date();
-
-            var year = currentDate.getFullYear();
-            var month = currentDate.getMonth() + 1; 
-            var day = currentDate.getDate();
-            var hours = currentDate.getHours();
-            var minutes = currentDate.getMinutes();
-            var seconds = currentDate.getSeconds();
-
-            var formattedDate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-
-            const dataSend = {
-                dataAnswer: selectedAnswers,
-                qid: qid,
-                currentDate: formattedDate
-            }
-
-            $.ajax({
-                type: 'POST', 
-                url: './views/client/controller/check-question.php',
-                data: dataSend,
-                success: function(response) {
-                    const res = JSON.parse(response);
-                    const dataQuestion = res.dataQuestion;
-
-                    dataQuestion.map(element => {
-                        var answerItems = $('.answer-item-'+element.id);
-
-                        if(element.resultAnswer == true){
-                            $('.answer-item-'+element.id).removeClass('warring')
-                            $('.answer-item-'+element.id).removeClass('active')
-                            $('.answer-item-'+element.id).eq(element.index - 1).addClass('active')
-                        } else {
-                            $('.answer-item-'+element.id).removeClass('warring')
-                            $('.answer-item-'+element.id).removeClass('active')
-                            $('.answer-item-'+element.id).eq(element.user_index - 1).addClass('warring')
-                        }
-                        
-                    });
-
-                    $('#res-point').addClass('card-box')
-                    $('#point').text('Điểm số: ' + res.point + ' / 10')
-
-                },
-                error: function(error) {
-                    console.error('Đã có lỗi xảy ra: ', error);
-                }
-            });
-
-        });
-
-    });
-
-</script>
