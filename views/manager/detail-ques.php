@@ -2,7 +2,7 @@
 
     $qid = $_GET['qid'];
 
-    $sqlGetQuestion = "SELECT * FROM `questions` JOIN topics ON questions.id_topic = topics.id WHERE id_topic = $qid";
+    $sqlGetQuestion = "SELECT questions.id as id_ques, questions.*, topics.id as id_topic, topics.* FROM `questions` JOIN topics ON questions.id_topic = topics.id WHERE id_topic = $qid";
 
     $dataAllQuestion = executeQuery($sqlGetQuestion, true) ?: [];
     $data = $dataAllQuestion['data'] != null ? $dataAllQuestion['data'] : [];
@@ -32,9 +32,9 @@
                     <h4 class="title-answer"><?= $value['question'] ?></h4> 
                     
                     <div>
-                        <button type="button" class="btn btn-xs" data-toggle="modal" data-target="#con-close-modal">
-                            <i class="fas fa-pen-nib"></i>
-                        </button>
+                        <a href="./?action=remove-question&id=<?= $value['id_ques'] ?>&qid=<?= $value['id_topic'] ?>">
+                            <i class="fe-x-circle"></i>
+                        </a>
                     </div>
                 </div>
                 

@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -58,6 +59,7 @@
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
 <script>
 
@@ -84,8 +86,6 @@
                 success: function(response) {
                     
                     const res = JSON.parse(response);
-                    
-                    console.log(res); 
 
                     if(res.error_code == 0){
                         toastr.success('Thêm chủ đề thành công!');

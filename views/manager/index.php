@@ -8,6 +8,14 @@
     $user = executeQuery($sqlFindUser, false);
 
 ?>
+
+<style>
+    .navbar-custom{
+        top: 0    
+    }
+</style>
+
+
 <div id="wrapper">
 
     <!-- Topbar Start -->
@@ -112,9 +120,6 @@
                             <li>
                                 <a href="./?action=list-users">Danh sách</a>
                             </li>
-                            <li>
-                                <a href="">Phân quyền</a>
-                            </li>
                         </ul>
                     </li>
 
@@ -136,7 +141,7 @@
     <div class="content-page">
 
         <!-- CONTENT START -->
-        <div class="content" style="padding: 15px 0 0 0">
+        <div class="content" >
             
             <?php
                 switch ($action) {
@@ -161,11 +166,11 @@
                         require("./views/manager/remove-ques.php");
                         break;
 
-                    case "list-users":
-                        require("./views/manager/list-user.php");
+                    case "remove-topic":
+                        require("./views/manager/remove-topic.php");
                         break;
 
-                    case "detail-user":
+                    case "list-users":
                         require("./views/manager/list-user.php");
                         break;
 

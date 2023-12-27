@@ -59,6 +59,17 @@
         }
     }
 
+    function formatRoleUser($typeCode) {
+        switch ($typeCode) {
+            case 1:
+                return 'Quản trị viên';
+            case 0:
+                return 'Người dùng';
+            default:
+                return 'Không xác định'; // Nếu giá trị không phù hợp
+        }
+    }
+
     function formatQuestionRank($rankCode) {
         switch ($rankCode) {
             case 1:

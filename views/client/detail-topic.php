@@ -52,28 +52,28 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="radio radio-success mb-2 answer-item-<?= $value['id_ques'] ?>">
-                                <input type="radio" name="correctAnswer-<?= $key ?>" class="<?= $value['id_ques'] ?>" id="answerA-<?= $key ?>" value="1">
+                                <input require type="radio" name="correctAnswer-<?= $key ?>" class="<?= $value['id_ques'] ?>" id="answerA-<?= $key ?>" value="1">
                                 <label for="answerA-<?= $key ?>">
                                     <span>A: </span>
                                     <span class="sub-header"><?= $value['answerA'] ?></span>
                                 </label>
                             </div>
                             <div class="radio radio-success mb-2 answer-item-<?= $value['id_ques'] ?>">
-                                <input type="radio" name="correctAnswer-<?= $key ?>" class="<?= $value['id_ques'] ?>" id="answerB-<?= $key ?>" value="2">
+                                <input require type="radio" name="correctAnswer-<?= $key ?>" class="<?= $value['id_ques'] ?>" id="answerB-<?= $key ?>" value="2">
                                 <label for="answerB-<?= $key ?>">
                                     <span>B: </span>
                                     <span class="sub-header"><?= $value['answerB'] ?></span>
                                 </label>
                             </div>
                             <div class="radio radio-success mb-2 answer-item-<?= $value['id_ques'] ?>">
-                                <input type="radio" name="correctAnswer-<?= $key ?>" class="<?= $value['id_ques'] ?>" id="answerC-<?= $key ?>" value="3">
+                                <input require type="radio" name="correctAnswer-<?= $key ?>" class="<?= $value['id_ques'] ?>" id="answerC-<?= $key ?>" value="3">
                                 <label for="answerC-<?= $key ?>">
                                     <span>C: </span>
                                     <span class="sub-header"><?= $value['answerC'] ?></span>
                                 </label>
                             </div>
                             <div class="radio radio-success mb-2 answer-item-<?= $value['id_ques'] ?>">
-                                <input type="radio" name="correctAnswer-<?= $key ?>" class="<?= $value['id_ques'] ?>" id="answerD-<?= $key ?>" value="4">
+                                <input require type="radio" name="correctAnswer-<?= $key ?>" class="<?= $value['id_ques'] ?>" id="answerD-<?= $key ?>" value="4">
                                 <label for="answerD-<?= $key ?>">
                                     <span>D: </span>
                                     <span class="sub-header"><?= $value['answerD'] ?></span>

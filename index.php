@@ -137,6 +137,9 @@
                     require("./views/manager/index.php");
                     break;
             
+                case "remove-topic":
+                    require("./views/manager/index.php");
+                    break;
         
                 default:
             }

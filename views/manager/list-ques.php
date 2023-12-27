@@ -11,7 +11,7 @@
         <div class="card">
             <div class="card-body">
 
-                <h4 class="header-title">Danh sách chủ đề</h4>
+                <h4 class="header-title">Danh sách câu hỏi</h4>
                 <!-- <p class="text-muted font-13 mb-4">
                     The Buttons extension for DataTables provides a common set of options, API methods and styling to display buttons on a page
                     that will interact with a DataTable. The core library provides the based framework upon which plug-ins can built.
@@ -41,7 +41,7 @@
                                 <td><?= $value['so_luong_cau_hoi'] ?></td>
                                 <td><?= formatQuestionRank($value['rank']) ?></td>
                                 <td>
-                                    <a style="color:white" href="?action=remove-question&qid=<?= $value[0] ?>">
+                                    <a style="color:white" href="?action=remove-topic&qid=<?= $value[0] ?>">
                                         <button class="btn btn-danger btn-xs waves-effect waves-light">
                                             <i class="fe-x-circle"></i>
                                         </button>
